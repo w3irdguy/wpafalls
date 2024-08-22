@@ -58,7 +58,7 @@ def execcmd(comando):
                 os.system("clear")
                 Cores.cc3(f"Trying Break WPA/WPA2 Handshake of {y}{arquivo_pcap}{w} with {r}{item}{w}")
                 time.sleep(5)
-                execmy(f"aircrack-ng -w /home/{usuario}/wpafalls/{item} -b {bssid} {arquivo_pcap}")
+                execmy(f"aircrack-ng -w /home/{usuario}/wpafalls/wlists/{item} -b {bssid} {arquivo_pcap}")
                 for i in range(90,0,-1):
                     Cores.cc3(f"Waiting {g}{i}{w} seconds for the next attempt...")
                     time.sleep(1)
