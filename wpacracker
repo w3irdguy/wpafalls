@@ -45,7 +45,7 @@ def execcmd(comando):
             pcap_refinado = arquivo_pcap[hs+3:]
             pcap_refinado_ultra = pcap_refinado[:12]
             bssid = pcap_refinado_ultra
-            cmdexec = ["cwlist.txt", "0xc0da-ptbr.txt", "7776palavras.txt", "best1050.txt", "first-name-pt-br.txt", "wlist.txt", "biblic-words-pt-br.txt", "br-wordlist", "brazilian-soccer-teams.txt", "brwlist.txt", "passphrases.txt", "10-million-password-list-top-10000000.txt", "numeros.txt", "wifite", "senhas.txt", "extra.txt"]
+            cmdexec = ["cwlist.txt", "0xc0da-ptbr.txt", "7776palavras.txt", "best1050.txt", "first-name-pt-br.txt", "wlist.txt", "biblic-words-pt-br.txt", "br-wordlist.txt", "brazilian-soccer-teams.txt", "brwlist.txt", "passphrases.txt", "10-million-password-list-top-1000000.txt", "numeros.txt", "wifite", "senhas.txt", "extra.txt"]
             for z in range(15, 0, -1):
                 os.system("clear")
                 Cores.cc3(f"[{g}USER{w}] : {y}{usuario}{w}")
