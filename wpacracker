@@ -28,7 +28,6 @@ def execcmd(comando):
     result = subprocess.run(['whoami'], capture_output=True, text=True, check=True)
     usuario = result.stdout.strip()
     try:
-        # Executa o comando e captura a saída
         #Cores.cc3(f"EXECUTING {comando[0]} {comando[1]} {comando[2]} {comando[3]}")
         time.sleep(2)
         resultado = subprocess.run(comando, shell=True, capture_output=True, text=True, check=True)
